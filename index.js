@@ -19,6 +19,15 @@ async #fectData(apiUrl){
 async getData(apiUrl) {
     return this.#fectData(apiUrl);
 }
+
+gropuDataByPostId(){
+    const data = this.#fectData();
+    
+    const postId =  
+
+    const grupData = data.
+}
+
 }
 
 const data = Singleton.getInstance();
@@ -46,3 +55,7 @@ data.getData('https://jsonplaceholder.typicode.com/posts')
     },{}
     )
   }
+
+  /// 3
+
+
