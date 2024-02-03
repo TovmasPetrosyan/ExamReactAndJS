@@ -1,3 +1,4 @@
+// 1
 class Singleton {
  static  #instance;
  
@@ -28,3 +29,20 @@ data.getData('https://jsonplaceholder.typicode.com/posts')
   .catch(error => {
     console.log(error.message);
   });
+
+
+  /// 2 
+
+  Array.prototype.groupBy = function(val){
+    return this.reduce(function(acc , obj) {
+        const key = obj[val];
+
+        if(!acc[key]){
+            acc[key] = [];
+        }
+
+        acc[key].push(obj);
+        return acc;
+    },{}
+    )
+  }
