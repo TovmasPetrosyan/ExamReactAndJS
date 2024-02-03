@@ -2,7 +2,8 @@ import React from 'react';
 
 import Modal from 'react-modal';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-
+import './modal.css';
+import * as Yup from 'yup';
 
 
 
@@ -46,7 +47,7 @@ function ModalItem() {
         contentLabel="Example Modal"
       >
         <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-        <button onClick={closeModal}>close</button>
+        <button className="close" onClick={closeModal}>close</button>
         <Formik
        initialValues={{ email: '', password: '' }}
        validate={values => {
@@ -58,6 +59,15 @@ function ModalItem() {
          ) {
            errors.email = 'Invalid email address';
          }
+         if (!values.password) {
+          errors.password = 'Required';
+        } else if (values.password.length < 8) {
+          errors.password = 'Password must be at least 8 characters long';
+        } else if (!/(?=.*[a-z])/.test(values.password)) {
+          errors.password = 'Password must contain at least one lowercase letter';
+        } else if (!/(?=.*[A-Z])/.test(values.password)) {
+          errors.password = 'Password must contain at least one uppercase letter';
+        }
          return errors;
        }}
        onSubmit={(values, { setSubmitting }) => {
