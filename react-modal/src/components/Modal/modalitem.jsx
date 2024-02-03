@@ -1,9 +1,9 @@
 import React from 'react';
-
 import Modal from 'react-modal';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import './modal.css';
-import * as Yup from 'yup';
+import Button from '@mui/material/Button';
+
 
 
 
@@ -17,6 +17,9 @@ const customStyles = {
       transform: 'translate(-50%, -50%)',
     },
   };
+  const styleForClose = {
+    position: 'absolute',
+  }
   
 
 function ModalItem() {
@@ -37,9 +40,10 @@ function ModalItem() {
   }
 
   return (
-    <div>
-      <button className='centerButton' onClick={openModal}>Open Modal</button>
-      <Modal
+    <div className='modal'>
+     
+      <Button className='centerButton' variant="contained"  onClick={openModal}>Open Modal</Button>
+      <Modal 
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
@@ -47,7 +51,8 @@ function ModalItem() {
         contentLabel="Example Modal"
       >
         <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-        <button className="close" onClick={closeModal}>close</button>
+        {/* <button className="close" onClick={closeModal}>close</button> */}
+        <Button style={styleForClose} className='close' variant="contained"  onClick={closeModal} size="small"> close</Button>
         <Formik
        initialValues={{ email: '', password: '' }}
        validate={values => {
@@ -79,13 +84,17 @@ function ModalItem() {
      >
        {({ isSubmitting }) => (
          <Form>
-           <Field type="email" name="email" />
+          <label htmlFor="">Email<br/>
+           <Field type="email" name="email" />  
+           </label>         
            <ErrorMessage name="email" component="div" />
+           <br/>
+           <label htmlFor="">Password<br/>
            <Field type="password" name="password" />
+           </label>
            <ErrorMessage name="password" component="div" />
-           <button type="submit" disabled={isSubmitting}>
-             Submit
-           </button>
+         <br/><br/>
+           <Button className='centerButton' variant="contained"  type="submit" disabled={isSubmitting} size="small"> Submit</Button>
          </Form>
        )}
      </Formik>
